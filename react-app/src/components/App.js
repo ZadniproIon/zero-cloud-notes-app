@@ -1,11 +1,13 @@
 import { Sidebar } from './Sidebar';
 import NoteWindow from './NoteWindow';
+import SettingsModal from './SettingsModal';
 
 function App() {
   return (
     <div id='app-window'>
-      <Sidebar />
-      <NoteWindow />
+      {/*<Sidebar />
+      <NoteWindow /> */}
+      <SettingsModal />
     </div>
   );
 }

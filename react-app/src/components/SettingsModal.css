@@ -1,0 +1,103 @@
+#settings-modal {
+    display: flex;
+    flex-direction: row;
+    background-color: #F9F9F9;
+    overflow: hidden;
+    width: 650px;
+    margin: auto auto;
+    border-radius: 20px;
+
+    box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.15);
+
+}
+
+#settings-modal-sidebar {
+    background-color: #111111;
+    color: #888888;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+
+    
+    padding: 1.5rem;
+    
+}
+
+#settings-modal-sidebar button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+
+    color: #888888;
+    background-color: unset;
+    border: unset;
+    padding: 0.75rem 0;
+    gap: 7px;
+}
+
+#settings-modal-sidebar button:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+#settings-modal-content {
+    flex: 1;
+    padding: 3rem;
+
+    
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#general {
+    
+}
+
+#general h2 {
+    text-align: center;
+}
+
+#general-options-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#general-options-div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#general-options-div > div button {
+    font-size: 1em;
+    padding: 15px 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    color: #333333;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+
+    cursor: pointer;
+}
+
+#delete-button {
+    background-color: #FF4D4F;
+    border: 1px solid #FF4D4F !important;
+    color: #FFFFFF !important;
+}
