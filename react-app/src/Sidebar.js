@@ -38,6 +38,23 @@ export function Sidebar() {
                     <div className='note-div'><p>Movie diary</p></div>
                     <div className='note-div'><p>Workout regime</p></div>
                     <div className='note-div'><p>This note has a longer name</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    <div className='note-div'><p>Just a note</p></div>
+                    
                 </div>
 
             </div>
