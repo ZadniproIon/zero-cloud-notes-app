@@ -27,16 +27,52 @@ export function SettingsModal() {
                 </div>
 
                 {/* Appearance tab */}
-                <div class="tab active" id="appearance">
-                    <label>Font size <select><option>Medium</option></select></label>
-                    <label>Font family <select><option>Inter</option></select></label>
-                    <label>Theme <select><option>Light</option></select></label>
-                    <label>Line spacing <select><option>1.5</option></select></label>
-                    <label>Full width <input type="checkbox"/></label>
+                <div class="tab" id="appearance">
+                    <label>Font size (note only)
+                        <select>
+                            <option>Small</option>
+                            <option>Medium</option>
+                            <option>Large</option>
+                        </select>
+                    </label>
+                    <label>Font family
+                        <select>
+                            <option>Inter</option>
+                            <option>Roboto</option>
+                        </select>
+                    </label>
+                    <label>Theme
+                        <select>
+                            <option>System</option>
+                            <option>Light</option>
+                            <option>Dark</option>
+                        </select>
+                    </label>
+                    <label>Color palette
+                        <select>
+                            <option>Default</option>
+                        </select>
+                    </label>
+                    <label>Line spacing
+                        <select>
+                            <option>1.25</option>
+                            <option>1.5</option>
+                            <option>1.75</option>
+                        </select>
+                    </label>
+                    <label>
+                        Full-width
+                        <label class="switch">
+                            <input type="checkbox"/>
+                            <span class="slider"></span>
+                        </label>
+                    </label>
+                    
+
                 </div>
 
                 {/* About tab */}
-                <div class="tab" id="about">
+                <div class="tab active" id="about">
                     <h2>ZeroCloud - notes app</h2>
                     <p><strong>Fully</strong> offline</p>
                     <p><strong>Light</strong> weight</p>
