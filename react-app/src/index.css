@@ -145,3 +145,15 @@ button, input, textarea, select {
 #note-content-text {
 
 }
+
+
+
+/* Added from ChatGPT */
+#note-content-note-title,
+#note-content-text {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  resize: none;
+}
