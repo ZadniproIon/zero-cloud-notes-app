@@ -2,6 +2,7 @@
 #settings-modal {
     display: flex;
     flex-direction: row;
+    align-items: center;
     background-color: #F9F9F9;
     overflow: hidden;
     width: 650px;
@@ -9,7 +10,7 @@
     border-radius: 20px;
 
     box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.15);
-
+    height: 400px;
 }
 
 #settings-modal-sidebar {
@@ -22,7 +23,7 @@
 
     
     padding: 1.5rem;
-    
+    height: 100%;   
 }
 
 #settings-modal-sidebar button {
@@ -39,10 +40,12 @@
 }
 
 /* also add for active */
-#settings-modal-sidebar button:hover {
+#settings-modal-sidebar button:hover,
+#settings-modal-sidebar button.active {
     cursor: pointer;
     color: #FFFFFF;
 }
+
 
 #settings-modal-content {
     flex: 1;
@@ -145,15 +148,6 @@ option:hover {
 }
 
 
-
-
-
-
-
-
-
-
-
 /* Full-width selector (circle in the pill) */
 .switch {
     position: relative;
@@ -200,4 +194,40 @@ option:hover {
   input:checked + .slider::before {
     transform: translateX(36px);  /* 78px width - knob width (36px) - left offset (3px * 2) */
   }
-  
+
+
+/* About tab */
+#about h2 {
+    text-align: center;
+}
+.about-description {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+
+.about-description p {
+    line-height: 1.5;
+}
+
+.about-left p {
+    font-weight: 600;
+    text-align: right;
+}
+
+.about-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+.about-links a {
+    text-decoration: none;
+    color: #333333;
+    background-color: #F5F5F5;
+    padding: 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}

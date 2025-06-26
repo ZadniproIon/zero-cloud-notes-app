@@ -1,21 +1,31 @@
 import './SettingsModal.css';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders, faPalette, faCircleInfo, faTrash, faUpload, faDownload, faCube } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 
 export function SettingsModal() {
 
+    const [activeTab, setActiveTab] = useState('about');
+
     return (
         <div id="settings-modal">
             <div id="settings-modal-sidebar">
-                <button onclick="showTab('general')"><FontAwesomeIcon icon={faSliders} />General</button>
-                <button onclick="showTab('appearance')"><FontAwesomeIcon icon={faPalette} />Appearance</button>
-                <button onclick="showTab('about')"><FontAwesomeIcon icon={faCircleInfo} />About</button>
+                <button onClick={() => setActiveTab('general')} className={activeTab === 'general' ? 'active' : ''}>
+                    <FontAwesomeIcon icon={faSliders} />General
+                </button>
+                <button onClick={() => setActiveTab('appearance')} className={activeTab === 'appearance' ? 'active' : ''}>
+                    <FontAwesomeIcon icon={faPalette} />Appearance
+                </button>
+                <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'active' : ''}>
+                    <FontAwesomeIcon icon={faCircleInfo} />About
+                </button>
             </div>
             <div id="settings-modal-content">      
                 
                 {/* General tab */}
-                <div class="tab" id="general">
+                <div className={`tab ${activeTab === 'general' ? 'active' : ''}`} id="general">
                     <h2>Hello, dear user!</h2>
                     <div id='general-options-div'>
                         <div><p>Import dummy notes</p><button><FontAwesomeIcon icon={faCube} />Import</button></div>
@@ -27,7 +37,7 @@ export function SettingsModal() {
                 </div>
 
                 {/* Appearance tab */}
-                <div class="tab" id="appearance">
+                <div className={`tab ${activeTab === 'appearance' ? 'active' : ''}`} id="appearance">
                     <label>Font size (note only)
                         <select>
                             <option>Small</option>
@@ -72,16 +82,42 @@ export function SettingsModal() {
                 </div>
 
                 {/* About tab */}
-                <div class="tab active" id="about">
-                    <h2>ZeroCloud - notes app</h2>
-                    <p><strong>Fully</strong> offline</p>
-                    <p><strong>Light</strong> weight</p>
-                    <p><strong>Privacy</strong> focused</p>
-                    <p><strong>Version</strong> 0.0.1 (beta)</p>
-                    <p><strong>Last update</strong> 21.04.2025</p>
-                    <button>GitHub</button>
-                    <button>Telegram</button>
+                <div className={`tab ${activeTab === 'about' ? 'active' : ''}`} id="about">
+                    <h2>ZeroCloud – notes app</h2>
+
+                    <div className="about-description">
+                        <div className="about-left">
+                            <p>
+                            Fully<br/>
+                            Light<br/>
+                            Privacy<br/>
+                            Version<br/>
+                            Last update
+                            </p>
+                        </div>
+                        <div className="about-right">
+                            <p>
+                            offline<br/>
+                            weight<br/>
+                            focused<br/>
+                            0.0.1 (beta)<br/>
+                            21.04.2025
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div className="about-links">
+                        <a href="https://github.com/YourRepo" target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faGithub} /> GitHub
+                        </a>
+                        <a href="https://t.me/YourHandle" target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faTelegram} /> Telegram
+                        </a>
+                    </div>
+
                 </div>
+
             </div>
         </div>
 
