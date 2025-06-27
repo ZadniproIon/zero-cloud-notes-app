@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export function NoteWindow({ note, onChange }) {
-  const [title, setTitle] = useState(note.title);
+  const [title, setTitle]     = useState(note.title);
   const [content, setContent] = useState(note.content);
+  const textareaRef           = useRef(null);
 
   // Sync when active note changes
   useEffect(() => {
@@ -10,18 +11,25 @@ export function NoteWindow({ note, onChange }) {
     setContent(note.content);
   }, [note]);
 
+  // Propagate changes upstream
   useEffect(() => {
     onChange({ title, content });
   }, [title, content]);
 
+  // Auto-grow textarea whenever `content` changes (including on mount)
+  useEffect(() => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 'px';
+  }, [content]);
+
   function handleContentChange(e) {
     setContent(e.target.value);
+    // (we no longer need to grow here—it's in the effect)
+  }
 
-    // Auto-grow textarea
-    e.target.style.height = 'auto'; // Reset height
-    e.target.style.height = e.target.scrollHeight + 'px'; // Adjust to content
-    }
-
+  if (!note) return null;
 
   return (
     <div id="note-window">
@@ -30,15 +38,16 @@ export function NoteWindow({ note, onChange }) {
           id="note-content-note-title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder='Note title'
+          placeholder="Note title"
         />
         <hr />
         <textarea
           id="note-content-text"
+          ref={textareaRef}
+          rows={1}
           value={content}
           onChange={handleContentChange}
           placeholder="Write your note's content here"
-          rows={1}
         />
       </div>
     </div>

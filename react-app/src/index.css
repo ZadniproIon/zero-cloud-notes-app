@@ -112,7 +112,7 @@ button, input, textarea, select {
   cursor: pointer;
   background-color: #F9F9F9;
   color: #000000;
-  padding: 15px 10px;
+  padding: 15px 15px;
 }
 /*      end of Side bar      */
 
@@ -134,6 +134,7 @@ button, input, textarea, select {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+
 }
 
 #note-content-note-title {
@@ -145,6 +146,14 @@ button, input, textarea, select {
 #note-content-text {
 
 }
+
+#note-content input,
+#note-content hr,
+#note-content textarea {
+  color: #111111;
+  
+}
+
 
 
 

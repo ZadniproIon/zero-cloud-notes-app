@@ -2,11 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesLeft, faGear, faPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { useState } from 'react';
+//import { saveNote } from '../db';   // adjust the path if needed
 
 
 
 
-export function Sidebar({ notes, setNotes, activeIndex, setActiveIndex }) {
+export function Sidebar({ notes, activeIndex, setActiveIndex, onAddNote }) {
   return (
     <div id="sidebar">
       {/* Top part */}
@@ -21,12 +22,7 @@ export function Sidebar({ notes, setNotes, activeIndex, setActiveIndex }) {
         </div>
         <div
           className='sidebar-options-div-item'
-          onClick={() => {
-            const newNote = { title: `Untitled ${notes.length + 1}`, content: "" };
-            setNotes([...notes, newNote]);
-            setActiveIndex(notes.length);
-        }}
-
+          onClick={onAddNote}
         >
           <FontAwesomeIcon icon={faPlus} />
           <p>New note</p>
@@ -43,14 +39,10 @@ export function Sidebar({ notes, setNotes, activeIndex, setActiveIndex }) {
 
         <div id='sidebar-div-2-notes-div'>
           {notes.map((note, index) => (
-            <div
-                className={`note-div ${index === activeIndex ? 'active-note' : ''}`}
-                onClick={() => setActiveIndex(index)}
-                key={index}
-            >
-                <p>{note.title}</p>
+            <div className={`note-div ${index === activeIndex ? 'active-note' : ''}`} key={note.id} onClick={() => setActiveIndex(index)}>
+              <p>{note.title.trim() || 'Untitled note'}</p>
             </div>
-            ))}
+          ))}
 
         </div>
       </div>

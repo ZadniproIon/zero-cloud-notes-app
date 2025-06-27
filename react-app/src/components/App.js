@@ -1,45 +1,78 @@
 import { Sidebar } from './Sidebar';
 import NoteWindow from './NoteWindow';
 import SettingsModal from './SettingsModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getAllNotes, saveNote, deleteNote } from '../db';
 
 function App() {
 
-  const [notes, setNotes] = useState([
-    { title: "This is the title of my note", content: "Lorem ipsum dolor sit amet..." },
-    { title: "Movie diary", content: "Saw Blade Runner 2049 again." },
-    { title: "Workout regime", content: "Push/pull/legs split." },
-    { title: "This note has a longer name ffffffffff", content: "" }
-  ]);
-
+  const [notes, setNotes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // 1) Load notes from IndexedDB on mount
+  useEffect(() => {
+    (async () => {
+      const stored = await getAllNotes();
+      if (stored.length) {
+        setNotes(stored);
+      } else {
+        // fallback default notes
+        /*setNotes([
+          { title: 'First note', content: '' }
+        ]);*/
+      }
+    })();
+  }, []);
+
+  
+  const handleAddNote = async () => {
+    const newNote = { title: '', content: '' };
+    //const newNote = { title: `Untitled ${notes.length+1}`, content: '' };
+    const id = await saveNote(newNote);
+    setNotes([...notes, { ...newNote, id }]);
+    setActiveIndex(notes.length);
+  };
+
+  // App.js
+  const handleChangeNote = async (updatedNote) => {
+    // preserve id
+    const noteWithId = { ...updatedNote, id: notes[activeIndex].id };
+    // update state
+    const updated = [...notes];
+    updated[activeIndex] = noteWithId;
+    setNotes(updated);
+    // save back to IndexedDB
+    await saveNote(noteWithId);   // this calls put, updating the existing record
+  };
+
+
+  const handleDelete = (index) => {
+    const noteToDelete = notes[index];
+    deleteNote(noteToDelete.id);
+    const updated = notes.filter((_, i) => i !== index);
+    setNotes(updated);
+    setActiveIndex(i => Math.max(0, i - 1));
+  };
+
 
   return (
     <div id="app-window">
       <Sidebar
         notes={notes}
-        setNotes={setNotes}
         activeIndex={activeIndex}
         setActiveIndex={setActiveIndex}
-      />
-      <NoteWindow
-        note={notes[activeIndex]}
-        onChange={(updatedNote) => {
-          const updatedNotes = [...notes];
-          updatedNotes[activeIndex] = updatedNote;
-          setNotes(updatedNotes);
-        }}
+        onAddNote={handleAddNote}
       />
 
-    </div>
-  );
+      {notes.length > 0 && (
+        <NoteWindow
+          note={notes[activeIndex]}
+          onChange={handleChangeNote}
+        />
+      )}
 
 
 
-  return (
-    <div id=''>
-      <Sidebar />
-      <NoteWindow />
     </div>
   );
 }
