@@ -39,6 +39,7 @@ export function NoteWindow({ note, onChange }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Note title"
+          autoComplete="off"
         />
         <hr />
         <textarea
@@ -48,6 +49,7 @@ export function NoteWindow({ note, onChange }) {
           value={content}
           onChange={handleContentChange}
           placeholder="Write your note's content here"
+          autoComplete="off"
         />
       </div>
     </div>
