@@ -12,6 +12,9 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Inter', sans-serif;
+  /*font-family: 'Poppins', sans-serif;*/
+  /*font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;*/
+
 }
 
 button, input, textarea, select {
@@ -21,6 +24,30 @@ button, input, textarea, select {
 #app-window {
   display: flex;
 }
+
+:root {
+  /* Sidebar (static) */
+  --sidebar-bg-color: #111111;
+  --sidebar-text-color: #F9F9F9;
+  --sidebar-text-inactive-color: #CCCCCC;
+
+  /* App (light theme) */
+  --app-bg-color: #F9F9F9;
+  --app-text-color: #111111;
+
+  /* Buttons & specials */
+  --button-bg-color: #F5F5F5;
+  --button-text-color: #333333;
+
+  /* Stroke */
+  --stroke: 1px solid #CCCCCC;
+
+  /* Shadows */
+  --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+
 /*      end of Base setup      */
 
 /*      Side bar      */
@@ -32,8 +59,8 @@ button, input, textarea, select {
   
 
 
-  background-color: #111111;
-  color: #CCCCCC;
+  background-color: var(--sidebar-bg-color);
+  color: var(--sidebar-text-inactive-color);
   font-size: 1rem;
   padding: 1.5rem;
 }
@@ -53,7 +80,7 @@ button, input, textarea, select {
 
 #title-name-div p {
   font-weight: bold;
-  color: #FFFFFF;
+  color: var(--sidebar-text-color);
 }
 
 #title-name-div {
@@ -66,12 +93,12 @@ button, input, textarea, select {
 
 
 #icon-faAnglesLeft:hover {
-  color: #FFFFFF;
+  color: var(--sidebar-text-color);
   cursor: pointer;
 }
 
 .sidebar-options-div-item:hover {
-  color: #FFFFFF;
+  color: var(--sidebar-text-color);
   cursor: pointer;
 
   font-size: 1.125em;
@@ -92,7 +119,7 @@ button, input, textarea, select {
 
 #sidebar-div-2-title {
   font-weight: bold;
-  color: #FFFFFF;
+  color: var(--sidebar-text-color);
   padding-bottom: 1.5rem;
 }
 
@@ -110,8 +137,8 @@ button, input, textarea, select {
 
 .note-div:hover, .active-note {
   cursor: pointer;
-  background-color: #F9F9F9;
-  color: #000000;
+  background-color: var(--sidebar-text-color);
+  color: var(--sidebar-bg-color);
   padding: 15px 15px;
 }
 /*      end of Side bar      */
@@ -122,7 +149,7 @@ button, input, textarea, select {
   width: 100%;
   height: 100vh;
   overflow-y: auto;
-  
+  background-color: var(--app-bg-color);
 }
 
 #note-content {
@@ -147,10 +174,12 @@ button, input, textarea, select {
 
 }
 
+
+/* The actual note content */
 #note-content input,
 #note-content hr,
 #note-content textarea {
-  color: #111111;
+  color: var(--app-text-color);
   
 }
 
