@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 
 
-export function Sidebar({ notes, activeIndex, setActiveIndex, onAddNote }) {
+export function Sidebar({ notes, activeIndex, setActiveIndex, onAddNote, onOpenSettings }) {
   return (
     <div id="sidebar">
       {/* Top part */}
@@ -16,7 +16,7 @@ export function Sidebar({ notes, activeIndex, setActiveIndex, onAddNote }) {
           <p>ZeroCloud</p>
           <FontAwesomeIcon icon={faAnglesLeft} id='icon-faAnglesLeft' />
         </div>
-        <div className='sidebar-options-div-item'>
+        <div className='sidebar-options-div-item' onClick={onOpenSettings}>
           <FontAwesomeIcon icon={faGear} />
           <p>Settings</p>
         </div>

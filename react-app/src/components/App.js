@@ -8,6 +8,7 @@ function App() {
 
   const [notes, setNotes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
 
   // 1) Load notes from IndexedDB on mount
   useEffect(() => {
@@ -56,24 +57,30 @@ function App() {
 
 
   return (
-    <div id="app-window">
-      <Sidebar
-        notes={notes}
-        activeIndex={activeIndex}
-        setActiveIndex={setActiveIndex}
-        onAddNote={handleAddNote}
-      />
-
-      {notes.length > 0 && (
-        <NoteWindow
-          note={notes[activeIndex]}
-          onChange={handleChangeNote}
+    <>
+      <div id="app-window">
+        <Sidebar
+          notes={notes}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+          onAddNote={handleAddNote}
+          onOpenSettings={() => setShowSettings(true)}
         />
+
+        {notes.length > 0 && (
+          <NoteWindow
+            note={notes[activeIndex]}
+            onChange={handleChangeNote}
+          />
+        )}
+      </div>
+
+      {showSettings && (
+        <SettingsModal onClose={() => setShowSettings(false)} />
       )}
-
-
-
-    </div>
+      
+    </>
+    
   );
 }
 

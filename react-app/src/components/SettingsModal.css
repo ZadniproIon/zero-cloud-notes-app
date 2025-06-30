@@ -1,3 +1,24 @@
+/* 1) full-screen blurred backdrop */
+.modal-overlay {
+    position: fixed;
+    inset: 0;                         /* top:0; right:0; bottom:0; left:0; */
+    background: rgba(140, 140, 140, 0.3);/* semi-transparent white */
+    backdrop-filter: blur(8px);       /* blur everything behind */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;                    /* sits on top of your flex layout */
+}
+
+/* 2) make sure your modal itself is above the overlay (optional) */
+#settings-modal {
+    position: relative;
+    margin: 0;        /* let flex centering of the overlay do the work */
+    z-index: 10000;   /* just in case */
+}
+
+
 /*          General Settings modal            */
 #settings-modal {
     display: flex;
@@ -7,9 +28,10 @@
     overflow: hidden;
     width: 650px;
     margin: auto auto;
-    border-radius: 20px;
+    border-radius: 24px;
+    
 
-    box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.15);
     height: 400px;
 }
 
@@ -43,7 +65,7 @@
 #settings-modal-sidebar button:hover,
 #settings-modal-sidebar button.active {
     cursor: pointer;
-    color: #FFFFFF;
+    color: #F9F9F9;
 }
 
 
