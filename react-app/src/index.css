@@ -193,6 +193,9 @@ button, input, textarea, select {
   color: var(--app-text-color);
   background-color: var(--app-bg-color);
 }
+#note-content hr {
+  border: 1px solid var(--app-text-color);
+}
 
 
 
