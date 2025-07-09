@@ -7,7 +7,7 @@ import { getAllNotes, saveNote, deleteNote } from '../db';
 function App() {
 
   const [notes, setNotes] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [showSettings, setShowSettings] = useState(false);
 
   // 1) Load notes from IndexedDB on mount
@@ -27,25 +27,40 @@ function App() {
 
   
   const handleAddNote = async () => {
-    const newNote = { title: '', content: '' };
-    //const newNote = { title: `Untitled ${notes.length+1}`, content: '' };
+    const timestamp = new Date().toISOString();
+    const newNote = { title: '', content: '', lastEdited: timestamp };
     const id = await saveNote(newNote);
     setNotes([...notes, { ...newNote, id }]);
     setActiveIndex(notes.length);
   };
+  
 
-  // App.js
+  
   const handleChangeNote = async (updatedNote) => {
-    // preserve id
-    const noteWithId = { ...updatedNote, id: notes[activeIndex].id };
-    // update state
+    const currentNote = notes[activeIndex];
+  
+    // Don't update if content didn't change
+    if (
+      updatedNote.title === currentNote.title &&
+      updatedNote.content === currentNote.content
+    ) {
+      return; // do nothing
+    }
+  
+    const timestamp = new Date().toISOString();
+    const noteWithId = {
+      ...updatedNote,
+      id: currentNote.id,
+      lastEdited: timestamp,
+    };
+  
     const updated = [...notes];
     updated[activeIndex] = noteWithId;
     setNotes(updated);
-    // save back to IndexedDB
-    await saveNote(noteWithId);   // this calls put, updating the existing record
+    await saveNote(noteWithId);
   };
-
+  
+  
 
   const handleDelete = (index) => {
     const noteToDelete = notes[index];
@@ -67,12 +82,13 @@ function App() {
           onOpenSettings={() => setShowSettings(true)}
         />
 
-        {notes.length > 0 && (
+        {activeIndex >= 0 && notes[activeIndex] && (
           <NoteWindow
             note={notes[activeIndex]}
             onChange={handleChangeNote}
           />
         )}
+
       </div>
 
       {showSettings && (
