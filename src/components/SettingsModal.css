@@ -1,0 +1,255 @@
+/* 1) full-screen blurred backdrop */
+.modal-overlay {
+    position: fixed;
+    inset: 0;                         /* top:0; right:0; bottom:0; left:0; */
+    background: rgba(140, 140, 140, 0.3);/* semi-transparent white */
+    backdrop-filter: blur(8px);       /* blur everything behind */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;                    /* sits on top of your flex layout */
+}
+
+/* 2) make sure your modal itself is above the overlay (optional) */
+#settings-modal {
+    position: relative;
+    margin: 0;        /* let flex centering of the overlay do the work */
+    z-index: 10000;   /* just in case */
+}
+
+
+/*          General Settings modal            */
+#settings-modal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F9F9F9;
+    overflow: hidden;
+    width: 650px;
+    margin: auto auto;
+    border-radius: 24px;
+    
+
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.15);
+    height: 400px;
+}
+
+#settings-modal-sidebar {
+    background-color: #111111;
+    color: #888888;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+
+    
+    padding: 1.5rem;
+    height: 100%;   
+}
+
+#settings-modal-sidebar button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+
+    color: #888888;
+    background-color: unset;
+    border: unset;
+    padding: 0.75rem 0;
+    gap: 7px;
+}
+
+/* also add for active */
+#settings-modal-sidebar button:hover,
+#settings-modal-sidebar button.active {
+    cursor: pointer;
+    color: #F9F9F9;
+}
+
+
+#settings-modal-content {
+    flex: 1;
+    padding: 3rem;
+
+    
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#general {
+    
+}
+
+#general h2 {
+    text-align: center;
+}
+
+#general-options-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#general-options-div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#general-options-div > div button {
+    font-size: 1em;
+    padding: 15px 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    color: #333333;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+
+    cursor: pointer;
+}
+
+#delete-button {
+    background-color: #FF4D4F;
+    border: 1px solid #FF4D4F !important;
+    color: #FFFFFF !important;
+}
+
+#appearance {
+    
+    gap: 10px;
+}
+
+#appearance > label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#appearance select {
+    padding: 10px 5px;
+    font-size: 1rem;
+    width: 120px;
+    color: #333333;
+
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+
+    transition: all 0.3s ease;
+}
+
+#appearance select:hover {
+    background-color: #111111;
+    border-color: #111111;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+#appearance select:focus {
+    outline: none;
+    cursor: pointer;
+}
+
+option:hover {
+    cursor: pointer;
+}
+
+
+/* Full-width selector (circle in the pill) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 78px;       /* new width based on aspect ratio */
+    height: 42px;      /* new height */
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 50px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.3s ease;
+  }
+  
+  .slider::before {
+    position: absolute;
+    content: "";
+    height: 32px;   /* 42px - 6px for padding (3px top + bottom) */
+    width: 32px;
+    left: 5px;
+    bottom: 5px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.2s ease;
+  }
+  
+  /* ON state */
+  input:checked + .slider {
+    background-color: #22c55e;
+  }
+  
+  input:checked + .slider::before {
+    transform: translateX(36px);  /* 78px width - knob width (36px) - left offset (3px * 2) */
+  }
+
+
+/* About tab */
+#about h2 {
+    text-align: center;
+}
+.about-description {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+
+.about-description p {
+    line-height: 1.5;
+}
+
+.about-left p {
+    font-weight: 600;
+    text-align: right;
+}
+
+.about-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+.about-links a {
+    text-decoration: none;
+    color: #333333;
+    background-color: #F5F5F5;
+    padding: 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
