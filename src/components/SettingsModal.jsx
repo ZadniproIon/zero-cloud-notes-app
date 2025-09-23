@@ -1,5 +1,7 @@
 import '../styles/SettingsModal.css';
 import { useState } from 'react';
+
+// Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders, faPalette, faCircleInfo, faTrash, faUpload, faDownload, faCube } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTelegram } from '@fortawesome/free-brands-svg-icons';

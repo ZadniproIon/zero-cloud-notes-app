@@ -1,21 +1,21 @@
 /*      Side bar      */
 #sidebar {
-    min-width: 288px;
-    max-width: fit-content;
-    height: 100vh;
-    overflow-y: auto;
     
-  
-  
-    background-color: var(--sidebar-bg-color);
-    color: var(--sidebar-text-inactive-color);
-    font-size: 1rem;
-    padding: 1.5rem;
-  
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
+  width: 300px;
+  flex: 0 0 300px;   /* don't grow, don't shrink, base size 300px */
+  box-sizing: border-box; /* so the 300px includes the padding */
+  height: 100vh;
+  overflow-y: auto;
+
+  background-color: var(--sidebar-bg-color);
+  color: var(--sidebar-text-inactive-color);
+  font-size: 1rem;
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
   
   
   /*    Side bar - above notes section    */
@@ -91,7 +91,15 @@
   .note-div {
     padding: 16px 16px;
     border-radius: 8px;
+    width: 100%;
     /*  */
+  }
+
+  .note-div p {
+    white-space: nowrap;        /* keep it in one line */
+    overflow: hidden;           /* hide anything beyond the container */
+    text-overflow: ellipsis;    /* show "..." */
+    max-width: 100%; 
   }
   
   .note-div:hover, .active-note {

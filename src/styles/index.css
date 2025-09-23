@@ -12,13 +12,12 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Inter', sans-serif;
+
 }
 
 button, input, textarea, select {
   font: inherit;
 }
-
-
 
 :root {
   /* Sidebar (static) */
@@ -41,8 +40,6 @@ button, input, textarea, select {
   --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-modal: 0 16px 32px rgba(0, 0, 0, 0.15);
 }
-
-
 /*      end of Base setup      */
 
 

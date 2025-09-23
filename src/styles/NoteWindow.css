@@ -24,10 +24,6 @@
     text-align: center;
 }
 
-#note-content-text {
-
-}
-
 
 /* The actual note content */
 #note-content input,
@@ -36,6 +32,7 @@
     color: var(--app-text-color);
     background-color: var(--app-bg-color);
 }
+
 #note-content hr {
     border: 1px solid var(--app-text-color);
 }
@@ -46,9 +43,9 @@
 /* Added from ChatGPT */
 #note-content-note-title,
 #note-content-text {
-border: none;
-outline: none;
-width: 100%;
-font-family: inherit;
-resize: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    resize: none;
 }

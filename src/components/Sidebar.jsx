@@ -1,11 +1,8 @@
 import '../styles/Sidebar.css';
+
+// Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesLeft, faGear, faPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
-import { useState } from 'react';
-//import { saveNote } from '../db';   // adjust the path if needed
-
-
 
 
 export function Sidebar({ notes, activeIndex, setActiveIndex, onAddNote, onOpenSettings }) {

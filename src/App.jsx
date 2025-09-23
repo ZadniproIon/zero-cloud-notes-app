@@ -4,7 +4,6 @@ import SettingsModal from './components/SettingsModal';
 import { useState, useEffect } from 'react';
 import { getAllNotes, saveNote, deleteNote } from './services/db';
 import "./styles/App.css"
-//import '../styles/SettingsModal.css';
 
 function App() {
 
