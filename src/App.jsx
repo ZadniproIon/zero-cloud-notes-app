@@ -2,7 +2,9 @@ import { Sidebar } from './components/Sidebar';
 import NoteWindow from './components/NoteWindow';
 import SettingsModal from './components/SettingsModal';
 import { useState, useEffect } from 'react';
-import { getAllNotes, saveNote, deleteNote } from './db';
+import { getAllNotes, saveNote, deleteNote } from './services/db';
+import "./styles/App.css"
+//import '../styles/SettingsModal.css';
 
 function App() {
 

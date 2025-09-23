@@ -1,3 +1,4 @@
+import '../styles/NoteWindow.css';
 import { useState, useEffect, useRef } from 'react';
 
 export function NoteWindow({ note, onChange }) {

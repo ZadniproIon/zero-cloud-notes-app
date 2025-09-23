@@ -110,15 +110,15 @@
 
 #general-options-div > div button {
     font-size: 1em;
-    padding: 15px 10px;
-    border-radius: 5px;
+    padding: 16px 12px;
+    border-radius: 8px;
     border: 1px solid #CCCCCC;
     color: #333333;
     
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 
     cursor: pointer;
 }
@@ -249,7 +249,7 @@ option:hover {
     text-decoration: none;
     color: #333333;
     background-color: #F5F5F5;
-    padding: 15px;
+    padding: 16px;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
 }

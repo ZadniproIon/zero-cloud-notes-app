@@ -1,0 +1,103 @@
+/*      Side bar      */
+#sidebar {
+    min-width: 288px;
+    max-width: fit-content;
+    height: 100vh;
+    overflow-y: auto;
+    
+  
+  
+    background-color: var(--sidebar-bg-color);
+    color: var(--sidebar-text-inactive-color);
+    font-size: 1rem;
+    padding: 1.5rem;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  
+  
+  /*    Side bar - above notes section    */
+  #sidebar-div-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  
+  #title-name-div p {
+    font-weight: bold;
+    color: var(--sidebar-text-color);
+  }
+  
+  #title-name-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0 !important;
+  }
+  
+  #icon-faAnglesLeft {
+    padding: 16px;
+    border-radius: 4px;
+  }
+  
+  #icon-faAnglesLeft:hover {
+    color: var(--sidebar-text-color);
+    cursor: pointer;
+    background-color: var(--sidebar-text-color);
+    color: var(--sidebar-bg-color);
+  
+  }
+  
+  .sidebar-options-div-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0px;
+    border-radius: 8px;
+  }
+  
+  .sidebar-options-div-item:hover {
+    color: var(--sidebar-text-color);
+    cursor: pointer;
+    background-color: var(--sidebar-text-color);
+    color: var(--sidebar-bg-color);
+    padding-left: 16px;
+  }
+  
+  /*    Side bar - notes section    */
+  #sidebar-div-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  #sidebar-div-2-title {
+    font-weight: bold;
+    color: var(--sidebar-text-color);
+    padding-bottom: 16px;
+  }
+  
+  #sidebar-div-2-notes-div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .note-div {
+    padding: 16px 16px;
+    border-radius: 8px;
+    /*  */
+  }
+  
+  .note-div:hover, .active-note {
+    cursor: pointer;
+    background-color: var(--sidebar-text-color);
+    color: var(--sidebar-bg-color);
+    
+  }
+  /*      end of Side bar      */

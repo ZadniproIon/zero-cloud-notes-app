@@ -1,0 +1,50 @@
+/*      Base setup      */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: all 0.2s linear;
+}
+
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+
+
+:root {
+  /* Sidebar (static) */
+  --sidebar-bg-color: #111111;
+  --sidebar-text-color: #F9F9F9;
+  --sidebar-text-inactive-color: #CCCCCC;
+
+  /* App (light theme) */
+  --app-bg-color: #F9F9F9;
+  --app-text-color: #111111;
+
+  /* Buttons & specials */
+  --button-bg-color: #F5F5F5;
+  --button-text-color: #333333;
+
+  /* Stroke */
+  --stroke: 1px solid #CCCCCC;
+
+  /* Shadows */
+  --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+
+/*      end of Base setup      */
+
+
+
+
