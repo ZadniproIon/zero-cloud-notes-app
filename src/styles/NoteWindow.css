@@ -11,6 +11,7 @@
     max-width: 800px;
     width: 100%;
     margin: 3rem auto;
+    padding: 0 3rem 50vh;
 
     display: flex;
     flex-direction: column;
@@ -24,11 +25,11 @@
     text-align: center;
 }
 
-
 /* The actual note content */
 #note-content input,
 #note-content hr,
-#note-content textarea {
+#note-content textarea,
+.ql-editor {
     color: var(--app-text-color);
     background-color: var(--app-bg-color);
 }
@@ -42,10 +43,50 @@
 
 /* Added from ChatGPT */
 #note-content-note-title,
-#note-content-text {
+#note-content-text,
+.ql-editor {
     border: none;
     outline: none;
     width: 100%;
     font-family: inherit;
     resize: none;
+
+    padding: 0 !important;
 }
+
+
+
+
+
+/* Quill */
+/* Ensure left-to-right and proper sizing */
+.ql-container, .ql-editor { direction: ltr; }
+.ql-editor { min-height: 280px; }
+
+/* Base body text */
+.note-editor .ql-editor {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: justify;
+  }
+  
+  /* Headings */
+  .note-editor .ql-editor h1 {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  
+  .note-editor .ql-editor h2 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .note-editor .ql-editor h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  /* Paragraph spacing (optional) */
+  .note-editor .ql-editor p { margin: 0 0 0.8em; }
+  

@@ -1,6 +1,9 @@
 import '../styles/NoteWindow.css';
 import { useState, useEffect, useRef } from 'react';
 
+import QuillEditor from "./QuillEditor";
+
+
 export function NoteWindow({ note, onChange }) {
   const [title, setTitle]     = useState(note.title);
   const [content, setContent] = useState(note.content);
@@ -35,6 +38,8 @@ export function NoteWindow({ note, onChange }) {
   return (
     <div id="note-window">
       <div id="note-content">
+        
+        {/* Note's title */}
         <input
           id="note-content-note-title"
           value={title}
@@ -43,17 +48,17 @@ export function NoteWindow({ note, onChange }) {
           autoComplete="off"
           spellCheck="false"
         />
-        <hr />
-        <textarea
-          id="note-content-text"
-          ref={textareaRef}
-          rows={1}
-          value={content}
-          onChange={handleContentChange}
-          placeholder="Write your note's content here"
-          autoComplete="off"
-          spellCheck="false"
+
+        <hr /> {/* Line between the note's title and content */}
+
+        {/* Note's content */}
+        <QuillEditor
+          className="note-editor"
+          noteId={note.id}
+          initialHTML={note.contentHTML || ""}
+          onChangeHTML={(html) => onChange({ ...note, contentHTML: html })}
         />
+
       </div>
     </div>
   );

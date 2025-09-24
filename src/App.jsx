@@ -3,7 +3,14 @@ import NoteWindow from './components/NoteWindow';
 import SettingsModal from './components/SettingsModal';
 import { useState, useEffect } from 'react';
 import { getAllNotes, saveNote, deleteNote } from './services/db';
-import "./styles/App.css"
+import "./styles/App.css";
+
+// in src/main.jsx or App.jsx
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
+
+
+
 
 function App() {
 
