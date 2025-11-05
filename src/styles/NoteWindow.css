@@ -35,7 +35,7 @@
 }
 
 #note-content hr {
-    border: 1px solid var(--app-text-color);
+    border: 1px solid var(--app-text-inactive-color);
 }
 
 
@@ -52,6 +52,12 @@
     resize: none;
 
     padding: 0 !important;
+}
+
+/* Placeholder colors */
+#note-content-note-title::placeholder,
+.ql-editor::placeholder {
+    color: var(--app-text-inactive-color);
 }
 
 

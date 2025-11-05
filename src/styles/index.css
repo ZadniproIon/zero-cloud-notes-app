@@ -21,24 +21,71 @@ button, input, textarea, select {
 
 :root {
   /* Sidebar (static) */
-  --sidebar-bg-color: #111111;
-  --sidebar-text-color: #F9F9F9;
-  --sidebar-text-inactive-color: #CCCCCC;
+  --sidebar-bg-color: hsl(0, 0%, 10%);
+  --sidebar-text-color: hsl(0, 0%, 95%);     /* normal */
+  --sidebar-text-gray-color: hsl(0, 0%, 85%); /* gray */
+  --sidebar-text-inactive-color: hsl(0, 0%, 50%);
 
-  /* App (light theme) */
-  --app-bg-color: #F9F9F9;
-  --app-text-color: #111111;
+  /* Note window (light theme) */
+  --app-bg-color: hsl(0, 0%, 97%);
+  --app-text-color: hsl(0, 0%, 10%);            /* normal */
+  --app-text-inactive-color: hsl(0, 0%, 50%);   /* inactive */
 
-  /* Buttons & specials */
-  --button-bg-color: #F5F5F5;
-  --button-text-color: #333333;
+  /* Buttons & specials (used in settings, links, etc.) */
+  --button-bg-color: hsl(0, 0%, 92%);
+  --button-text-color: hsl(0, 0%, 20%);
+  --button-stroke-color: hsl(0, 0%, 80%);
+  --stroke: 1px solid var(--button-stroke-color);
 
-  /* Stroke */
-  --stroke: 1px solid #CCCCCC;
+  /* Destructive (delete) buttons */
+  --danger-bg-color: #FF4D4F;
+  --danger-border-color: #DC2626;
+  --danger-text-color: #FFFFFF;
+  --danger-bg-hover-color: var(--danger-border-color);
 
   /* Shadows */
   --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-modal: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Scrollbars: thin, container-colored track, inactive thumb → active on hover */
+/* Firefox base */
+* {
+  scrollbar-width: thin;
+}
+
+/* Sidebar scrollbar (Firefox) */
+#sidebar {
+  scrollbar-color: var(--sidebar-text-inactive-color) transparent;
+}
+
+/* Note window scrollbar (Firefox) */
+#note-window {
+  scrollbar-color: var(--app-text-inactive-color) transparent;
+}
+
+/* WebKit scrollbars for Sidebar */
+#sidebar::-webkit-scrollbar { width: 6px; height: 6px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--sidebar-text-inactive-color);
+  border-radius: 8px;
+}
+#sidebar:hover::-webkit-scrollbar-thumb,
+#sidebar:active::-webkit-scrollbar-thumb {
+  background-color: var(--sidebar-text-color);
+}
+
+/* WebKit scrollbars for Note window */
+#note-window::-webkit-scrollbar { width: 6px; height: 6px; }
+#note-window::-webkit-scrollbar-track { background: transparent; }
+#note-window::-webkit-scrollbar-thumb {
+  background-color: var(--app-text-inactive-color);
+  border-radius: 8px;
+}
+#note-window:hover::-webkit-scrollbar-thumb,
+#note-window:active::-webkit-scrollbar-thumb {
+  background-color: var(--app-text-color);
 }
 /*      end of Base setup      */
 
