@@ -1,5 +1,5 @@
 import '../styles/SettingsModal.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,9 +11,37 @@ import { faGithub, faTelegram } from '@fortawesome/free-brands-svg-icons';
 export function SettingsModal({ onClose }) {
 
     const [activeTab, setActiveTab] = useState('general');
+    const [visible, setVisible] = useState(false);
+    const [closing, setClosing] = useState(false);
+
+    useEffect(() => {
+        const t = setTimeout(() => setVisible(true), 0);
+        return () => clearTimeout(t);
+    }, []);
+
+    function handleRequestClose() {
+        if (closing) return;
+        setClosing(true);
+        setVisible(false);
+        setTimeout(() => {
+            onClose && onClose();
+        }, 200);
+    }
+
+    // Close on Escape key
+    useEffect(() => {
+        function onKeyDown(e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                handleRequestClose();
+            }
+        }
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className={`modal-overlay ${visible ? 'visible' : ''} ${closing ? 'closing' : ''}`} onClick={handleRequestClose}>
             <div id="settings-modal" onClick={e => e.stopPropagation()}>
                 <div id="settings-modal-sidebar">
                     <button onClick={() => setActiveTab('general')} className={activeTab === 'general' ? 'active' : ''}>

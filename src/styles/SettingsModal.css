@@ -9,6 +9,19 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;                    /* sits on top of your flex layout */
+
+    /* Appear/disappear baseline (uses global transition: all 0.2s linear) */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-overlay.closing {
+    opacity: 0;
 }
 
 /* 2) make sure your modal itself is above the overlay (optional) */
@@ -16,6 +29,20 @@
     position: relative;
     margin: 0;        /* let flex centering of the overlay do the work */
     z-index: 10000;   /* just in case */
+
+    /* Subtle pop effect on enter/exit */
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+}
+
+.modal-overlay.visible #settings-modal {
+    opacity: 1;
+    transform: none;
+}
+
+.modal-overlay.closing #settings-modal {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
 }
 
 
