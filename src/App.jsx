@@ -1,6 +1,7 @@
 import { Sidebar } from './components/Sidebar';
 import NoteWindow from './components/NoteWindow';
 import SettingsModal from './components/SettingsModal';
+import dummyNotes from './assets/dummy-notes.json';
 import { useState, useEffect } from 'react';
 import { getAllNotes, saveNote, deleteNote } from './services/db';
 import "./styles/App.css";
@@ -78,6 +79,27 @@ function App() {
     setActiveIndex(i => Math.max(0, i - 1));
   };
 
+  const handleImportDummyNotes = async () => {
+    const now = new Date().toISOString();
+    const created = [];
+    for (const d of dummyNotes) {
+      const toSave = {
+        title: d.title || '',
+        content: d.content ?? '',
+        contentHTML: d.contentHTML || '',
+        lastEdited: now,
+        isDummy: true,
+      };
+      const id = await saveNote(toSave);
+      created.push({ ...toSave, id });
+    }
+    // Merge into state and focus the most recent imported note
+    setNotes((prev) => [...prev, ...created]);
+    if (created.length) {
+      setActiveIndex((prev) => prev < 0 ? notes.length : notes.length + created.length - 1);
+    }
+  };
+
 
   return (
     <>
@@ -101,7 +123,10 @@ function App() {
       </div>
 
       {showSettings && (
-        <SettingsModal onClose={() => setShowSettings(false)} />
+        <SettingsModal
+          onClose={() => setShowSettings(false)}
+          onImportDummyNotes={handleImportDummyNotes}
+        />
       )}
       
     </>

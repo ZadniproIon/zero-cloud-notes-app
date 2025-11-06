@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Welcome to ZeroCloud",
+    "contentHTML": "<h1>Welcome to ZeroCloud</h1><p><em>Lightweight</em>, <strong>privacy-first</strong>, and works fully <strong>offline</strong>.</p><h2>Key features</h2><ul><li>Rich-text editor powered by Quill</li><li>Instant autosave to your browser (IndexedDB)</li><li>Sidebar with quick note switching</li><li>Clean typography with headings, bold, italic, and lists</li><li>Keyboard friendly: Esc closes dialogs</li></ul><h2>Tips</h2><ul><li>Use headings to structure your notes</li><li>Try bold/italic to emphasize ideas</li><li>Create lists for tasks and outlines</li></ul><p>Enjoy your writing!</p>",
+    "content": ""
+  },
+  {
+    "title": "JSS small project",
+    "contentHTML": "<h1>JSS small project</h1><p>This note mixes code and commentary. Below is a tiny JS snippet:</p><pre><code class=\"language-js\">// A tiny state helper\nfunction createStore(initial) {\n  let state = initial;\n  const subs = new Set();\n  return {\n    get: () => state,\n    set: (next) => { state = next; subs.forEach(fn => fn(state)); },\n    subscribe: (fn) => { subs.add(fn); return () => subs.delete(fn); }\n  };\n}\n\nconst store = createStore({ count: 0 });\nstore.subscribe(s => console.log('count =', s.count));\nstore.set({ count: 1 });\n</code></pre><p>Explanation:</p><ol><li><strong>createStore</strong> returns basic <em>get/set/subscribe</em> utilities.</li><li>We can observe changes by subscribing to state updates.</li><li>Great for experiments and tiny apps.</li></ol><h3>Next steps</h3><ul><li>Add persistence with <code>localStorage</code> or IndexedDB</li><li>Expose a simple API for UI components</li><li>Write a few unit tests</li></ul>",
+    "content": ""
+  },
+  {
+    "title": "A long, regular note",
+    "contentHTML": "<h1>On Focus and Flow</h1><p><em>Deep work</em> requires time, intention, and the removal of distractions. When you settle into a focused block, your attention narrows and ideas start to connect more naturally.</p><p><strong>Consistency</strong> matters more than intensity. Short, regular sessions compound into meaningful progress. A reliable routine is better than a heroic sprint.</p><h2>Guidelines</h2><ul><li>Start with a small, clear objective</li><li>Remove the nearest distraction</li><li>Work in 25–50 minute intervals</li><li>Write down the next step before stopping</li></ul><p>Progress often looks uneven—some days are fast, others slow. That is normal. Keep going, and prefer clarity over speed.</p><h3>Closing thought</h3><p>Write, revise, and repeat. Momentum grows with each pass.</p>",
+    "content": ""
+  }
+]
+

@@ -8,7 +8,7 @@ import { faGithub, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 
 
-export function SettingsModal({ onClose }) {
+export function SettingsModal({ onClose, onImportDummyNotes }) {
 
     const [activeTab, setActiveTab] = useState('general');
     const [visible, setVisible] = useState(false);
@@ -60,7 +60,7 @@ export function SettingsModal({ onClose }) {
                     <div className={`tab ${activeTab === 'general' ? 'active' : ''}`} id="general">
                         <h2>Hello, dear user!</h2>
                         <div id='general-options-div'>
-                            <div><p>Import dummy notes</p><button><FontAwesomeIcon icon={faCube} />Import</button></div>
+                            <div><p>Import dummy notes</p><button onClick={onImportDummyNotes}><FontAwesomeIcon icon={faCube} />Import</button></div>
                             <div><p>Import (actual) notes</p><button><FontAwesomeIcon icon={faUpload} />Import</button></div>
                             <div><p>Export notes</p><button><FontAwesomeIcon icon={faDownload} />Export</button></div>
                             <div><p>Delete all notes</p><button id='delete-button'><FontAwesomeIcon icon={faTrash} />Delete</button></div>
