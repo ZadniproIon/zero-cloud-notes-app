@@ -1,5 +1,5 @@
 import '../styles/SettingsModal.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,11 +8,12 @@ import { faGithub, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 
 
-export function SettingsModal({ onClose, onImportDummyNotes }) {
+export function SettingsModal({ onClose, onImportDummyNotes, onImportActualNotes, onExportNotes, onDeleteAllNotes }) {
 
     const [activeTab, setActiveTab] = useState('general');
     const [visible, setVisible] = useState(false);
     const [closing, setClosing] = useState(false);
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         const t = setTimeout(() => setVisible(true), 0);
@@ -61,9 +62,40 @@ export function SettingsModal({ onClose, onImportDummyNotes }) {
                         <h2>Hello, dear user!</h2>
                         <div id='general-options-div'>
                             <div><p>Import dummy notes</p><button onClick={onImportDummyNotes}><FontAwesomeIcon icon={faCube} />Import</button></div>
-                            <div><p>Import (actual) notes</p><button><FontAwesomeIcon icon={faUpload} />Import</button></div>
-                            <div><p>Export notes</p><button><FontAwesomeIcon icon={faDownload} />Export</button></div>
-                            <div><p>Delete all notes</p><button id='delete-button'><FontAwesomeIcon icon={faTrash} />Delete</button></div>
+                            <div>
+                                <p>Import (actual) notes</p>
+                                <button onClick={() => fileInputRef.current && fileInputRef.current.click()}>
+                                    <FontAwesomeIcon icon={faUpload} />Import
+                                </button>
+                                <input
+                                    type="file"
+                                    accept="application/json"
+                                    ref={el => (fileInputRef.current = el)}
+                                    style={{ display: 'none' }}
+                                    onChange={async (e) => {
+                                        const file = e.target.files && e.target.files[0];
+                                        if (!file) return;
+                                        try {
+                                            const text = await file.text();
+                                            const data = JSON.parse(text);
+                                            const arr = Array.isArray(data) ? data : (Array.isArray(data?.notes) ? data.notes : []);
+                                            if (!arr.length) {
+                                                alert('No notes found in file. Expecting an array of notes.');
+                                                return;
+                                            }
+                                            onImportActualNotes && onImportActualNotes(arr);
+                                        } catch (err) {
+                                            console.error('Import failed:', err);
+                                            alert('Failed to import notes. Ensure it is valid JSON.');
+                                        } finally {
+                                            // reset input so selecting the same file again will trigger change
+                                            e.target.value = '';
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div><p>Export notes</p><button onClick={onExportNotes}><FontAwesomeIcon icon={faDownload} />Export</button></div>
+                            <div><p>Delete all notes</p><button id='delete-button' onClick={onDeleteAllNotes}><FontAwesomeIcon icon={faTrash} />Delete</button></div>
                         </div>
                         
                     </div>

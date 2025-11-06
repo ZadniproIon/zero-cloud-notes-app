@@ -3,7 +3,8 @@ import NoteWindow from './components/NoteWindow';
 import SettingsModal from './components/SettingsModal';
 import dummyNotes from './assets/dummy-notes.json';
 import { useState, useEffect } from 'react';
-import { getAllNotes, saveNote, deleteNote } from './services/db';
+import { getAllNotes, saveNote, deleteNote, clearAllNotes } from './services/db';
+import { get as kvGet, keys as kvKeys, del as kvDel } from 'idb-keyval';
 import "./styles/App.css";
 
 // in src/main.jsx or App.jsx
@@ -47,22 +48,24 @@ function App() {
   
   const handleChangeNote = async (updatedNote) => {
     const currentNote = notes[activeIndex];
-  
-    // Don't update if content didn't change
-    if (
-      updatedNote.title === currentNote.title &&
-      updatedNote.content === currentNote.content
-    ) {
-      return; // do nothing
-    }
-  
+
+    // Merge with current to avoid dropping fields like contentHTML
+    const merged = { ...currentNote, ...updatedNote };
+
+    // Skip save only if nothing changed (title, content, contentHTML)
+    const noChange =
+      merged.title === currentNote.title &&
+      merged.content === currentNote.content &&
+      merged.contentHTML === currentNote.contentHTML;
+    if (noChange) return;
+
     const timestamp = new Date().toISOString();
     const noteWithId = {
-      ...updatedNote,
+      ...merged,
       id: currentNote.id,
       lastEdited: timestamp,
     };
-  
+
     const updated = [...notes];
     updated[activeIndex] = noteWithId;
     setNotes(updated);
@@ -100,6 +103,93 @@ function App() {
     }
   };
 
+  const handleExportNotes = async () => {
+    try {
+      // ensure we have the latest from DB
+      const all = await getAllNotes();
+      const minimal = await Promise.all(
+        all.map(async (n) => {
+          let html = n.contentHTML ?? '';
+          if ((!html || html === '<p><br></p>') && n?.id != null) {
+            try {
+              const cached = await kvGet(`zc:quill:html:${n.id}`);
+              if (typeof cached === 'string') html = cached;
+            } catch (_) {
+              // ignore fallback failure
+            }
+          }
+          return {
+            title: n.title ?? '',
+            contentHTML: html ?? '',
+            lastEdited: n.lastEdited ?? null,
+          };
+        })
+      );
+      const blob = new Blob([JSON.stringify(minimal, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const ts = new Date().toISOString().replace(/[:.]/g, '-');
+      a.href = url;
+      a.download = `zero-cloud-notes-export-${ts}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Export failed:', err);
+      alert('Failed to export notes. See console for details.');
+    }
+  };
+
+  const handleImportActualNotes = async (importedArr) => {
+    try {
+      const now = new Date().toISOString();
+      const created = [];
+      for (const raw of importedArr) {
+        const toSave = {
+          title: raw.title ?? '',
+          content: '',
+          contentHTML: raw.contentHTML ?? '',
+          lastEdited: raw.lastEdited ?? raw.lastSaved ?? now,
+        };
+        const id = await saveNote(toSave);
+        created.push({ ...toSave, id });
+      }
+      setNotes(prev => [...prev, ...created]);
+      if (created.length) {
+        setActiveIndex(prev => (prev < 0 ? notes.length : notes.length + created.length - 1));
+      }
+      alert(`Imported ${created.length} notes.`);
+    } catch (err) {
+      console.error('Import failed:', err);
+      alert('Failed to import notes. See console for details.');
+    }
+  };
+
+  const handleDeleteAllNotes = async () => {
+    const ok = window.confirm('Delete ALL notes? This cannot be undone.');
+    if (!ok) return;
+    try {
+      await clearAllNotes();
+      // Clear Quill caches
+      try {
+        const allKeys = await kvKeys();
+        const toDelete = allKeys.filter(
+          (k) => typeof k === 'string' && (k.startsWith('zc:quill:html:') || k.startsWith('zc:quill:delta:'))
+        );
+        await Promise.all(toDelete.map((k) => kvDel(k)));
+      } catch (_) {
+        // non-fatal if key cleanup fails
+      }
+      setNotes([]);
+      setActiveIndex(-1);
+      alert('All notes deleted.');
+    } catch (err) {
+      console.error('Delete all failed:', err);
+      alert('Failed to delete all notes. See console for details.');
+    }
+  };
+
 
   return (
     <>
@@ -126,6 +216,9 @@ function App() {
         <SettingsModal
           onClose={() => setShowSettings(false)}
           onImportDummyNotes={handleImportDummyNotes}
+          onImportActualNotes={handleImportActualNotes}
+          onExportNotes={handleExportNotes}
+          onDeleteAllNotes={handleDeleteAllNotes}
         />
       )}
       

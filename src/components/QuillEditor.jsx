@@ -18,6 +18,10 @@ export default function QuillEditor({
   const saveTimer   = useRef(null);
   const onChangeRef = useRef(onChangeHTML);
   const [ready, setReady] = useState(false);
+  // Capture the provided initialHTML only when noteId changes,
+  // so parent updates to contentHTML do not trigger a re-init.
+  const initHTMLRef = useRef(initialHTML);
+  useEffect(() => { initHTMLRef.current = initialHTML; }, [noteId]);
 
   // keep callback stable
   useEffect(() => { onChangeRef.current = onChangeHTML; }, [onChangeHTML]);
@@ -57,10 +61,10 @@ export default function QuillEditor({
     (async () => {
       try {
         const delta = await get(STORAGE_KEY_DELTA);
-        if (delta?.ops?.length) q.setContents(delta);
+        if (delta?.ops?.length) q.setContents(delta, 'silent');
         else {
-          const savedHtml = (await get(STORAGE_KEY_HTML)) ?? initialHTML ?? "";
-          if (savedHtml) q.clipboard.dangerouslyPasteHTML(savedHtml);
+          const savedHtml = (await get(STORAGE_KEY_HTML)) ?? initHTMLRef.current ?? "";
+          if (savedHtml) q.clipboard.dangerouslyPasteHTML(savedHtml, 'silent');
         }
       } finally {
         setReady(true);
@@ -68,7 +72,9 @@ export default function QuillEditor({
     })();
 
     // Debounced save
-    const handleChange = () => {
+    const handleChange = (_delta, _old, source) => {
+      // Ignore programmatic changes (initial load, API updates)
+      if (source !== 'user') return;
       if (saveTimer.current) clearTimeout(saveTimer.current);
       saveTimer.current = setTimeout(async () => {
         const clean = DOMPurify.sanitize(q.root.innerHTML, { USE_PROFILES: { html: true } });
@@ -85,7 +91,7 @@ export default function QuillEditor({
       if (editorRef.current) editorRef.current.innerHTML = "";
       quillRef.current = null;
     };
-  }, [noteId, STORAGE_KEY_DELTA, STORAGE_KEY_HTML, initialHTML]);
+  }, [noteId, STORAGE_KEY_DELTA, STORAGE_KEY_HTML]);
 
   return (
     <div className={className}>

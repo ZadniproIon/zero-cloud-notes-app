@@ -33,3 +33,8 @@ export async function deleteNote(id) {
   const db = await getDb();
   return db.delete(STORE_NAME, id);
 }
+
+export async function clearAllNotes() {
+  const db = await getDb();
+  return db.clear(STORE_NAME);
+}
