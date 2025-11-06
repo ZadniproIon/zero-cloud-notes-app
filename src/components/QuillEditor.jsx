@@ -1,6 +1,6 @@
 // src/components/QuillEditor.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Quill from "quill";            // v2
+import Quill from "quill";
 import DOMPurify from "dompurify";
 import { get, set } from "idb-keyval";
 

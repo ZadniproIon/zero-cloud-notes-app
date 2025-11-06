@@ -2,9 +2,11 @@ import '../styles/NoteWindow.css';
 import { useState, useEffect, useRef } from 'react';
 
 import QuillEditor from "./QuillEditor";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 
-export function NoteWindow({ note, onChange }) {
+export function NoteWindow({ note, onChange, onDelete }) {
   const [title, setTitle]     = useState(note.title);
   const [content, setContent] = useState(note.content);
   const textareaRef           = useRef(null);
@@ -37,6 +39,23 @@ export function NoteWindow({ note, onChange }) {
 
   return (
     <div id="note-window">
+      {/* Actions (fixed to top-right of note window) */}
+      <div id="note-actions">
+        <button
+          id="note-delete-button"
+          type="button"
+          aria-label="Delete note"
+          title="Delete note"
+          onClick={onDelete}
+        >
+          {/* Temporary: map to requested API shape */}
+          {(() => {
+            const byPrefixAndName = { fas: { 'trash-can': faTrashCan } };
+            return <FontAwesomeIcon icon={byPrefixAndName.fas['trash-can']} />;
+          })()}
+        </button>
+      </div>
+
       <div id="note-content">
         
         {/* Note's title */}

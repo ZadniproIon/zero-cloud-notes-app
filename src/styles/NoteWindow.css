@@ -19,6 +19,37 @@
 
 }
 
+/* Top-right actions row */
+#note-window { position: relative; }
+
+/* Stick actions to the top-right of the scrollable note window */
+#note-actions {
+    position: sticky;
+    top: 16px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 16px; /* 16px from the right border */
+}
+
+#note-delete-button {
+    padding: 16px;
+    background: transparent;
+    border: none;
+    color: var(--app-text-inactive-color); /* inactive by default */
+    cursor: pointer;
+}
+
+#note-delete-button:hover {
+    color: var(--danger-border-color); /* red on hover */
+}
+
+/* FontAwesome icon sizing */
+#note-delete-button svg {
+    font-size: 16px;
+}
+
 #note-content-note-title {
     font-size: 2em;
     font-weight: 700;

@@ -94,6 +94,7 @@ function App() {
           <NoteWindow
             note={notes[activeIndex]}
             onChange={handleChangeNote}
+            onDelete={() => handleDelete(activeIndex)}
           />
         )}
 
