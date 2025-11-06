@@ -202,12 +202,16 @@ function App() {
           onOpenSettings={() => setShowSettings(true)}
         />
 
-        {activeIndex >= 0 && notes[activeIndex] && (
+        {activeIndex >= 0 && notes[activeIndex] ? (
           <NoteWindow
             note={notes[activeIndex]}
             onChange={handleChangeNote}
             onDelete={() => handleDelete(activeIndex)}
           />
+        ) : (
+          <div id="note-window" className="empty">
+            <p>Select a note and start working :)</p>
+          </div>
         )}
 
       </div>

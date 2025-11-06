@@ -97,7 +97,7 @@ export default function QuillEditor({
     <div className={className}>
       {!ready && (
         <div className="rounded-xl border p-3 text-neutral-500">
-          {/*Loading editor…*/}
+          Loading editor…
         </div>
       )}
       <div ref={editorRef} />

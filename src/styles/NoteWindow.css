@@ -5,6 +5,19 @@
     overflow-y: auto;
     background-color: var(--app-bg-color);
   }
+
+/* Empty-state: center the hint text */
+#note-window.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#note-window.empty p {
+  color: var(--app-text-inactive-color);
+  font-size: 16px;
+  font-weight: bold;
+}
   
 #note-content {
 
